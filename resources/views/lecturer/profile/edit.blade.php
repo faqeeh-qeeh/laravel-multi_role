@@ -11,84 +11,82 @@
             <p class="text-purple-100">Update your lecturer information and settings</p>
         </div>
         
-        <!-- Profile Edit Form -->
-        <form action="{{ route('lecturer.profile.update') }}" method="POST" enctype="multipart/form-data" class="p-8">
-            @csrf
-            @method('PUT')
-            
-            @if(session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                    {{ session('success') }}
-                </div>
-            @endif
-            
-            @if($errors->any())
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Left Column - Profile Photo -->
-                <div class="md:col-span-1">
-                    <div class="sticky top-8">
-                        <div class="bg-gray-50 rounded-lg p-6">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Profile Photo</h3>
-                            
-                            <!-- Current Photo -->
-                            <div class="flex flex-col items-center mb-6">
-                                <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
-                                    <img src="{{ $lecturer->profile_photo_url }}" 
-                                         alt="{{ $lecturer->name }}" 
-                                         id="profile-photo-preview"
-                                         class="w-full h-full object-cover">
-                                </div>
-                                <p class="text-sm text-gray-500 text-center">
-                                    Current profile photo
+        @if(session('success'))
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded m-8">
+                {{ session('success') }}
+            </div>
+        @endif
+        
+        @if($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded m-8">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-8">
+            <!-- Left Column - Profile Photo -->
+            <div class="md:col-span-1">
+                <div class="sticky top-8">
+                    <div class="bg-gray-50 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Profile Photo</h3>
+                        
+                        <!-- Current Photo -->
+                        <div class="flex flex-col items-center mb-6">
+                            <div class="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-lg mb-4">
+                                <img src="{{ $lecturer->profile_photo_url }}" 
+                                     alt="{{ $lecturer->name }}" 
+                                     id="profile-photo-preview"
+                                     class="w-full h-full object-cover">
+                            </div>
+                        </div>
+                        
+                        <!-- Upload Controls -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Upload New Photo
+                                </label>
+                                <input type="file" 
+                                       id="profile_photo" 
+                                       name="profile_photo" 
+                                       form="profile-update-form"
+                                       accept="image/*"
+                                       class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
+                                       onchange="previewImage(event)">
+                                <p class="text-xs text-gray-500 mt-1">
+                                    JPG, PNG or GIF. Max size 2MB.
                                 </p>
                             </div>
                             
-                            <!-- Upload Controls -->
-                            <div class="space-y-4">
-                                <div>
-                                    <label for="profile_photo" class="block text-sm font-medium text-gray-700 mb-2">
-                                        Upload New Photo
-                                    </label>
-                                    <input type="file" 
-                                           id="profile_photo" 
-                                           name="profile_photo" 
-                                           accept="image/*"
-                                           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100"
-                                           onchange="previewImage(event)">
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        JPG, PNG or GIF. Max size 2MB.
-                                    </p>
+                            @if($lecturer->profile_photo)
+                                <div class="pt-4 border-t border-gray-200">
+                                    <form action="{{ route('lecturer.profile.delete.photo') }}" method="POST" id="delete-photo-form">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" 
+                                                onclick="confirmDeletePhoto()"
+                                                class="w-full bg-red-50 hover:bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-trash-alt mr-2"></i> Remove Photo
+                                        </button>
+                                    </form>
                                 </div>
-                                
-                                @if($lecturer->profile_photo)
-                                    <div class="pt-4 border-t border-gray-200">
-                                        <form action="{{ route('lecturer.profile.delete.photo') }}" method="POST" id="delete-photo-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" 
-                                                    onclick="confirmDeletePhoto()"
-                                                    class="w-full bg-red-50 hover:bg-red-100 text-red-700 px-4 py-2 rounded-lg flex items-center justify-center">
-                                                <i class="fas fa-trash-alt mr-2"></i> Remove Photo
-                                            </button>
-                                        </form>
-                                    </div>
-                                @endif
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
-                
-                <!-- Right Column - Form Fields -->
-                <div class="md:col-span-2">
+            </div>
+            
+            <!-- Right Column - Form Fields -->
+            <div class="md:col-span-2">
+                <!-- Form Utama untuk Update Profile -->
+                <form action="{{ route('lecturer.profile.update') }}" method="POST" enctype="multipart/form-data" id="profile-update-form">
+                    @csrf
+                    @method('PUT')
+                    
                     <div class="space-y-6">
                         <!-- Personal Information Section -->
                         <div class="bg-gray-50 rounded-lg p-6">
@@ -153,7 +151,7 @@
                         </div>
                         
                         <!-- Change Password Section -->
-                        <div class="bg-gray-50 rounded-lg p-6" id="password">
+                        <div class="bg-gray-50 rounded-lg p-6">
                             <h3 class="text-lg font-semibold text-gray-800 mb-4">Change Password</h3>
                             <p class="text-sm text-gray-500 mb-4">
                                 Leave blank if you don't want to change your password
@@ -204,9 +202,9 @@
                             </button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -233,7 +231,7 @@
     }
     
     // Confirm password change
-    document.querySelector('form').addEventListener('submit', function(e) {
+    document.getElementById('profile-update-form').addEventListener('submit', function(e) {
         const currentPassword = document.getElementById('current_password').value;
         const newPassword = document.getElementById('new_password').value;
         const confirmPassword = document.getElementById('new_password_confirmation').value;

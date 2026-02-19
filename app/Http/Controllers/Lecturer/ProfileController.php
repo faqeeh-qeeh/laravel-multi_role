@@ -26,7 +26,7 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $lecturer = Auth::guard('lecturer')->user();
+        $lecturer = Lecturer::find(Auth::guard('lecturer')->user()->id);
         
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
@@ -84,7 +84,7 @@ class ProfileController extends Controller
 
     public function deletePhoto()
     {
-        $lecturer = Auth::guard('lecturer')->user();
+        $lecturer = Lecturer::find(Auth::guard('lecturer')->user()->id);
         
         if ($lecturer->profile_photo && Storage::disk('public')->exists('profile-photos/lecturer/' . $lecturer->profile_photo)) {
             Storage::disk('public')->delete('profile-photos/lecturer/' . $lecturer->profile_photo);
