@@ -1,59 +1,371 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Multi Role Authentication System  
+# Sistem Autentikasi Multi Role Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A complete **Multi Role Authentication System built with Laravel** that supports multiple user roles with separate authentication guards, dashboards, and profile management.
 
-## About Laravel
+Sebuah **sistem autentikasi multi role berbasis Laravel** yang mendukung beberapa jenis pengguna dengan sistem login, dashboard, dan manajemen profil yang terpisah untuk setiap role.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# 🚀 Features | Fitur
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## English
+This project provides a complete authentication system for multiple user roles including:
 
-## Learning Laravel
+- Admin Authentication
+- Lecturer Authentication
+- Student Authentication
+- Separate Login and Registration for each role
+- Independent Dashboard for each role
+- Profile management system
+- Profile photo upload support
+- User management by admin
+- Search and filter users
+- Responsive dashboard UI using TailwindCSS
+- Toast notification system
+- Secure password hashing
+- Validation system for all forms
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Bahasa Indonesia
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Project ini menyediakan sistem autentikasi lengkap untuk beberapa role pengguna, yaitu:
 
-## Laravel Sponsors
+- Autentikasi Admin
+- Autentikasi Dosen (Lecturer)
+- Autentikasi Mahasiswa (Student)
+- Halaman Login dan Register terpisah untuk setiap role
+- Dashboard berbeda untuk setiap role
+- Sistem manajemen profil pengguna
+- Upload foto profil
+- Admin dapat mengelola data pengguna
+- Fitur pencarian dan filter pengguna
+- Tampilan dashboard responsif menggunakan TailwindCSS
+- Sistem notifikasi toast
+- Password hashing yang aman
+- Validasi form yang lengkap
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+# 🧠 System Architecture | Arsitektur Sistem
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## English
 
-## Contributing
+This system uses **Laravel Multi Authentication Guards** to separate authentication between different roles.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Each role has its own:
 
-## Code of Conduct
+- Model
+- Authentication Guard
+- Controller
+- Dashboard
+- Profile Management
+- Views
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Roles included:
 
-## Security Vulnerabilities
+| Role | Description |
+|-----|-------------|
+| Admin | System administrator who manages users |
+| Lecturer | Lecturer or teacher user |
+| Student | Student user |
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## Bahasa Indonesia
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Sistem ini menggunakan **Laravel Multi Authentication Guards** untuk memisahkan sistem login antara role yang berbeda.
+
+Setiap role memiliki:
+
+- Model
+- Guard autentikasi
+- Controller
+- Dashboard
+- Manajemen profil
+- Tampilan (View)
+
+Role yang tersedia:
+
+| Role | Deskripsi |
+|-----|-------------|
+| Admin | Administrator sistem yang mengelola pengguna |
+| Lecturer | Pengguna dosen |
+| Student | Pengguna mahasiswa |
+
+---
+
+# 📂 Project Structure | Struktur Project
+
+
+app/
+├── Models
+│ ├── Admin.php
+│ ├── Lecturer.php
+│ └── Student.php
+│
+├── Http/Controllers
+│ ├── Admin
+│ ├── Lecturer
+│ └── Student
+│
+resources/views
+├── admin
+├── lecturer
+└── student
+
+
+Each role has its own authentication controller and dashboard controller.
+
+Setiap role memiliki controller autentikasi dan dashboard masing-masing.
+
+---
+
+# ⚙️ Installation | Instalasi
+
+## 1. Clone Repository
+
+
+git clone https://github.com/faqeeh-qeeh/laravel-multi_role.git
+
+cd laravel-multi-role-auth
+
+
+---
+
+## 2. Install Dependencies
+
+
+composer install
+
+
+---
+
+## 3. Copy Environment File
+
+
+cp .env.example .env
+
+
+---
+
+## 4. Generate Application Key
+
+
+php artisan key:generate
+
+
+---
+
+## 5. Setup Database
+
+Edit the `.env` file.
+
+Ubah konfigurasi database pada file `.env`.
+
+
+DB_DATABASE=your_database
+DB_USERNAME=root
+DB_PASSWORD=
+
+
+---
+
+## 6. Run Migration
+
+
+php artisan migrate
+
+
+---
+
+## 7. Storage Link
+
+This command is required for profile photo uploads.
+
+Perintah ini diperlukan untuk upload foto profil.
+
+
+php artisan storage:link
+
+
+---
+
+## 8. Run the Application
+
+
+php artisan serve
+
+
+Open in browser:
+
+
+http://127.0.0.1:8000
+
+
+---
+
+# 🔑 Authentication Routes | Route Login
+
+## Admin
+
+
+/admin/login
+/admin/register
+
+
+## Lecturer
+
+
+/lecturer/login
+/lecturer/register
+
+
+## Student
+
+
+/student/login
+/student/register
+
+
+---
+
+# 👤 User Roles Access | Akses Berdasarkan Role
+
+## Admin
+
+Admin can:
+
+- Manage students
+- Manage lecturers
+- View dashboard analytics
+- Delete users
+- View user profiles
+
+Admin dapat:
+
+- Mengelola mahasiswa
+- Mengelola dosen
+- Melihat statistik dashboard
+- Menghapus pengguna
+- Melihat profil pengguna
+
+---
+
+## Lecturer
+
+Lecturer can:
+
+- Register account
+- Login to lecturer dashboard
+- Edit profile
+- Upload profile photo
+
+Dosen dapat:
+
+- Mendaftar akun
+- Login ke dashboard dosen
+- Mengedit profil
+- Upload foto profil
+
+---
+
+## Student
+
+Student can:
+
+- Register account
+- Login to student dashboard
+- Edit profile
+- Upload profile photo
+
+Mahasiswa dapat:
+
+- Mendaftar akun
+- Login ke dashboard mahasiswa
+- Mengedit profil
+- Upload foto profil
+
+---
+
+# 🧩 Customization | Modifikasi Sistem
+
+## English
+
+This project can be modified to:
+
+- Add more user roles
+- Convert to API authentication
+- Integrate with mobile applications
+- Add permissions and role hierarchy
+- Implement RBAC system
+- Add course or learning management features
+
+## Bahasa Indonesia
+
+Project ini dapat dimodifikasi untuk:
+
+- Menambahkan role pengguna baru
+- Mengubah sistem menjadi API authentication
+- Integrasi dengan aplikasi mobile
+- Menambahkan sistem permission
+- Menggunakan RBAC (Role Based Access Control)
+- Menambahkan fitur sistem pembelajaran
+
+---
+
+# 🔒 Security
+
+This project uses Laravel built-in security features:
+
+- Password hashing
+- CSRF protection
+- Request validation
+- Guard authentication
+- Session protection
+
+---
+
+# 🛠 Built With | Teknologi yang Digunakan
+
+- Laravel
+- PHP
+- MySQL
+- TailwindCSS
+- AlpineJS
+- Blade Template Engine
+
+---
+
+# 📌 Use Cases | Contoh Penggunaan
+
+This system can be used for:
+
+- University portal systems
+- Learning management systems
+- School management systems
+- Multi user dashboard applications
+- SaaS authentication templates
+
+Sistem ini dapat digunakan untuk:
+
+- Portal universitas
+- Sistem pembelajaran
+- Sistem manajemen sekolah
+- Dashboard aplikasi multi pengguna
+- Template autentikasi SaaS
+
+---
+
+# 📜 License
+
+This project is open-source and free to use for educational and commercial purposes.
+
+Project ini bersifat open-source dan dapat digunakan untuk keperluan pendidikan maupun komersial.
+
+---
+
+# ✨ Author
+
+Developed for developers who need a **ready-to-use Laravel multi-role authentication system**.
+
+Dikembangkan untuk developer yang membutuhkan **template autentikasi multi role Laravel yang siap digunakan**.
