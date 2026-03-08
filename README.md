@@ -96,8 +96,8 @@ Role yang tersedia:
 
 # 📂 Project Structure | Struktur Project
 
-
-app/
+```
+app
 ├── Models
 │ ├── Admin.php
 │ ├── Lecturer.php
@@ -112,7 +112,7 @@ resources/views
 ├── admin
 ├── lecturer
 └── student
-
+```
 
 Each role has its own authentication controller and dashboard controller.
 
@@ -124,35 +124,34 @@ Setiap role memiliki controller autentikasi dan dashboard masing-masing.
 
 ## 1. Clone Repository
 
-
-git clone https://github.com/faqeeh-qeeh/laravel-multi_role.git
-
-cd laravel-multi-role-auth
-
+```sh
+    git clone https://github.com/faqeeh-qeeh/laravel-multi_role.git
+    cd laravel-multi-role-auth
+```
 
 ---
 
 ## 2. Install Dependencies
 
-
-composer install
-
+ ```sh
+    composer install
+```
 
 ---
 
 ## 3. Copy Environment File
 
-
-cp .env.example .env
-
+```sh
+    cp .env.example .env
+```
 
 ---
 
 ## 4. Generate Application Key
 
-
-php artisan key:generate
-
+```sh
+    php artisan key:generate
+```
 
 ---
 
@@ -162,19 +161,19 @@ Edit the `.env` file.
 
 Ubah konfigurasi database pada file `.env`.
 
-
-DB_DATABASE=your_database
-DB_USERNAME=root
-DB_PASSWORD=
-
+```sh
+    DB_DATABASE=your_database
+    DB_USERNAME=root
+    DB_PASSWORD=
+```
 
 ---
 
 ## 6. Run Migration
 
-
-php artisan migrate
-
+ ```sh
+    php artisan migrate
+ ```
 
 ---
 
@@ -184,9 +183,9 @@ This command is required for profile photo uploads.
 
 Perintah ini diperlukan untuk upload foto profil.
 
-
-php artisan storage:link
-
+```sh
+    php artisan storage:link
+```
 
 ---
 
@@ -208,23 +207,20 @@ http://127.0.0.1:8000
 
 ## Admin
 
-
-/admin/login
-/admin/register
+- /admin/login
+- /admin/register
 
 
 ## Lecturer
 
-
-/lecturer/login
-/lecturer/register
+- /lecturer/login
+- /lecturer/register
 
 
 ## Student
 
-
-/student/login
-/student/register
+- /student/login
+- /student/register
 
 
 ---
