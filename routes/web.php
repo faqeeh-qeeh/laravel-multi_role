@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\UserManagementController as AdminUserManagementController;
 use App\Http\Controllers\Student\AuthController as StudentAuthController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
@@ -38,6 +39,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/update', [AdminProfileController::class, 'update'])->name('update');
             Route::delete('/photo', [AdminProfileController::class, 'deletePhoto'])->name('delete.photo');
         });
+        
+        // User Management Routes
+        Route::prefix('users')->name('users.')->group(function () {
+            Route::get('/students', [AdminUserManagementController::class, 'students'])->name('students');
+            Route::get('/lecturers', [AdminUserManagementController::class, 'lecturers'])->name('lecturers');
+            Route::get('/student/{id}', [AdminUserManagementController::class, 'showStudent'])->name('student.show');
+            Route::get('/lecturer/{id}', [AdminUserManagementController::class, 'showLecturer'])->name('lecturer.show');
+            Route::delete('/student/{id}', [AdminUserManagementController::class, 'deleteStudent'])->name('student.delete');
+            Route::delete('/lecturer/{id}', [AdminUserManagementController::class, 'deleteLecturer'])->name('lecturer.delete');
+        });
+
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
     });
 });

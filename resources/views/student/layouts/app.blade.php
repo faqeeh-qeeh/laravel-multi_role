@@ -190,19 +190,102 @@
 
             <!-- Success Message -->
             @if(session('success'))
-                <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-                    {{ session('success') }}
+                <div id="success-toast" 
+                    class="fixed top-4 right-4 z-50 flex items-center w-full max-w-sm bg-white border-l-4 border-green-500 shadow-lg rounded-lg overflow-hidden transform transition-all duration-500 translate-x-0 opacity-100"
+                    role="alert">
+                    <div class="flex items-center justify-between w-full p-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-gray-800">Success!</p>
+                                <p class="text-sm text-gray-600">{{ session('success') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="closeToast('success-toast')" class="ml-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    {{-- Progress bar --}}
+                    <div class="absolute bottom-0 left-0 h-1 bg-green-500 progress-bar" style="width: 100%;"></div>
                 </div>
             @endif
 
-            <!-- Error Messages -->
-            @if($errors->any())
-                <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            @if(session('error'))
+                <div id="error-toast" 
+                    class="fixed top-4 right-4 z-50 flex items-center w-full max-w-sm bg-white border-l-4 border-red-500 shadow-lg rounded-lg overflow-hidden transform transition-all duration-500 translate-x-0 opacity-100"
+                    role="alert">
+                    <div class="flex items-center justify-between w-full p-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+                                    <i class="fas fa-exclamation-circle text-red-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-gray-800">Error!</p>
+                                <p class="text-sm text-gray-600">{{ session('error') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="closeToast('error-toast')" class="ml-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    {{-- Progress bar --}}
+                    <div class="absolute bottom-0 left-0 h-1 bg-red-500 progress-bar" style="width: 100%;"></div>
+                </div>
+            @endif
+
+            @if(session('warning'))
+                <div id="warning-toast" 
+                    class="fixed top-4 right-4 z-50 flex items-center w-full max-w-sm bg-white border-l-4 border-yellow-500 shadow-lg rounded-lg overflow-hidden transform transition-all duration-500 translate-x-0 opacity-100"
+                    role="alert">
+                    <div class="flex items-center justify-between w-full p-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center">
+                                    <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-gray-800">Warning!</p>
+                                <p class="text-sm text-gray-600">{{ session('warning') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="closeToast('warning-toast')" class="ml-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    {{-- Progress bar --}}
+                    <div class="absolute bottom-0 left-0 h-1 bg-yellow-500 progress-bar" style="width: 100%;"></div>
+                </div>
+            @endif
+
+            @if(session('info'))
+                <div id="info-toast" 
+                    class="fixed top-4 right-4 z-50 flex items-center w-full max-w-sm bg-white border-l-4 border-blue-500 shadow-lg rounded-lg overflow-hidden transform transition-all duration-500 translate-x-0 opacity-100"
+                    role="alert">
+                    <div class="flex items-center justify-between w-full p-4">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center">
+                                    <i class="fas fa-info-circle text-blue-500"></i>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-gray-800">Information</p>
+                                <p class="text-sm text-gray-600">{{ session('info') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="closeToast('info-toast')" class="ml-4 text-gray-400 hover:text-gray-600 focus:outline-none">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    {{-- Progress bar --}}
+                    <div class="absolute bottom-0 left-0 h-1 bg-blue-500 progress-bar" style="width: 100%;"></div>
                 </div>
             @endif
 
@@ -271,7 +354,86 @@
             }
         });
     </script>
-    
+    <script>
+        // Auto close toast after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('[id$="-toast"]');
+            
+            toasts.forEach(toast => {
+                // Set timeout to close toast
+                setTimeout(() => {
+                    closeToast(toast.id);
+                }, 5000); // 5 seconds
+                
+                // Animate progress bar
+                const progressBar = toast.querySelector('.progress-bar');
+                if (progressBar) {
+                    progressBar.style.transition = 'width 5s linear';
+                    setTimeout(() => {
+                        progressBar.style.width = '0%';
+                    }, 100);
+                }
+            });
+        });
+        
+        // Close toast function
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.transform = 'translateX(100%)';
+                toast.style.opacity = '0';
+                
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 500);
+            }
+        }
+        
+        // Close toast with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const toasts = document.querySelectorAll('[id$="-toast"]');
+                toasts.forEach(toast => closeToast(toast.id));
+            }
+        });
+    </script>
     @stack('scripts')
+    <style>
+            /* Toast animation */
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    [id$="-toast"] {
+        animation: slideIn 0.3s ease-out;
+    }
+    
+    /* Stack multiple toasts */
+    [id$="-toast"] + [id$="-toast"] {
+        margin-top: 1rem;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 640px) {
+        [id$="-toast"] {
+            top: 1rem;
+            right: 1rem;
+            left: 1rem;
+            width: auto;
+            max-width: none;
+        }
+    }
+    </style>
+    
 </body>
 </html>
