@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    @auth('admin')
+                    {{-- @auth('admin')
                         <span class="text-gray-700">Admin: {{ auth()->guard('admin')->user()->name }}</span>
                         <form method="POST" action="{{ route('admin.logout') }}">
                             @csrf
@@ -45,7 +45,7 @@
                                 Logout
                             </button>
                         </form>
-                    @endauth
+                    @endauth --}}
                 </div>
             </div>
         </div>

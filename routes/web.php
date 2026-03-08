@@ -11,7 +11,6 @@ use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 use App\Http\Controllers\Lecturer\AuthController as LecturerAuthController;
 use App\Http\Controllers\Lecturer\DashboardController as LecturerDashboardController;
 use App\Http\Controllers\Lecturer\ProfileController as LecturerProfileController;
-use App\Models\Student;
 
 // Home page
 Route::get('/', function () {

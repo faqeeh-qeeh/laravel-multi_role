@@ -11,25 +11,6 @@
             <p class="text-blue-100 text-sm sm:text-base mt-1">Update your personal information and settings</p>
         </div>
         
-        {{-- @if(session('success'))
-            <div class="mx-4 sm:mx-6 md:mx-8 mt-4 sm:mt-6 md:mt-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-                <div class="flex items-center">
-                    <i class="fas fa-check-circle mr-2"></i>
-                    {{ session('success') }}
-                </div>
-            </div>
-        @endif
-        
-        @if($errors->any())
-            <div class="mx-4 sm:mx-6 md:mx-8 mt-4 sm:mt-6 md:mt-8 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                <ul class="list-disc list-inside text-sm">
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif --}}
-        
         <!-- Grid Layout - Stack di mobile, side-by-side di desktop -->
         <div class="flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8 p-4 sm:p-6 md:p-8">
             <!-- Left Column - Profile Photo (di atas di mobile) -->
